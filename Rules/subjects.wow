@@ -1,0 +1,438 @@
+//Topics
+//HR
+lexicon: (input="stem")
+{
+recruitment,
+talentmanagement,
+teamportret,
+} = HR;
+
+lexicon: (input="component")
+{
+recruitment,
+talent,
+} = HR;
+
+//Org
+lexicon: (input="stem")
+{
+universiteit
+} = Org;
+
+//Innovation
+lexicon: (input="component")
+{
+innovatie,
+} = Innovation;
+
+lexicon: (input="stem")
+{
+digitaal assistent,
+} = Innovation;
+
+//Education 
+lexicon: (input="head")
+{
+docent,
+student,
+} = Education;
+
+lexicon: (input="stem")
+{
+leeromgeving
+} = Education;
+
+//Technology
+lexicon: (input="normalized_stem") { 
+(.)*system, 
+} = System;
+
+lexicon: (input="normalized_stem") {
+device
+} = Device;
+
+rule: { 
+(Nn|Adj|Adv){0,3}(Device)} = Technology;
+
+rule: { 
+(System)} = Technology;
+
+lexicon: {
+Master,
+Bacholor,
+Summer school,
+
+} = EducationType;
+
+lexicon: (input="normalized_literal") {
+AGV (.)*,
+VVDL ETG,
+Thi (.)*,
+componentvervaardigingsmachine,
+lineair (.)*,
+semi - automatic,
+energieverbruik,
+warmteafgifte,
+K3D,
+Sensor,
+MI,
+monolithisch optical,
+3D (-)? (.)*,
+The MonOpSys project,
+alt,
+chassis,
+Groba clan,
+vacuüm systems,
+D&M,
+Matlab Simulink program,
+energie (.)*,
+MPC Motion Controller Platform,
+Lantech Malden,
+composiet,
+VFI,
+Cordis,
+coronapandemie,
+hihi (-)? (.)*,
+LuGre model,
+virtual (.)*,
+The cobot,
+meetapparaat,
+testopstelling,
+progressie,
+krachtsport,
+BullsAI,
+Fine Tooling developed,
+(.)* hardware,
+(.)* microcontroller,
+delta Electronics,
+(.)* motion,
+Selective Compliance Articulated Robot Arm,
+(.)* automation,
+frame,
+SPDAM (.)*,
+timer (.)*,
+kantel (.)*,
+Energy Transfer Smart manufacturing,
+ultraviolet lithography,
+glastuinbouw,
+prodrive,
+(.)* Electronics,
+transfer,
+Digital Twin,
+blower,
+Smart Production Cell,
+(.)* procesautomatisering,
+drone,
+} = Topics;
+
+lexicon:(input="normalized_literal"){
+Robot(s)?,
+robot(s)?,
+robot(.)*,
+} = Robot;
+
+lexicon:(input="normalized_literal"){
+(.)* manufacturing,
+} = Manufacturing;
+
+lexicon:(input="normalized_literal"){
+(.)* production,
+} = Production;
+
+rule: { 
+(Robot),
+(Manufacturing),
+(Production)} = Topics;
+
+//Position
+lexicon:{
+Junior Developer,
+} = Position;
+
+//city
+lexicon:(input="normalized_literal"){
+Engels,
+manage, 
+As,
+ways,
+Sophia Rotterdam,
+} = NoCity;
+
+rule: { City[ NoCity] } = wow::filter@(concept="City");
+
+//no person
+lexicon:(input="normalized_literal")
+{
+B.V. Hart,
+Lex Werken,
+Lex,
+Michael Jackson,
+Lightning McQueen,
+Max Verstappen,
+IVY Works,
+Ivy Works,
+Maradona,
+Engels,
+Michael van Gerwen,
+Raymond van Barneveld,
+Uri Geller,
+Andre Kuipers,
+Frits Philip Muziekgebouw,
+Den Bosch,
+Junior Developer,
+Chemistry Black,
+Perspectives Unisitation,
+Arbitration,
+hart van Noord Holland,
+Professor Dr,
+B.V. Maris,
+Sopia Rotterdam,
+Corporate,
+Life Support,
+Diving Support,
+Safety Focus,
+Safety Officer,
+Ecosystem Protection,
+Data Processing,
+Data Management,
+Marin About,
+Careers Contact
+} = NoPerson;
+
+lexicon: (input="normalized_stem") {
+tdm,
+} = tdm;
+
+rule: { 
+(Nn|Adj|Adv){0,3}(tdm)} = NoPerson;
+
+lexicon: (input="normalized_stem") {
+special,
+} = special;
+
+rule: { 
+(Nn|Adj|Adv){0,3}(special)} = NoPerson;
+
+lexicon: (input="normalized_stem") {
+ogel
+} = ogel;
+
+rule: { 
+(Nn|Adj|Adv){0,3}(ogel)} = NoPerson;
+
+rule: { Person[ NoPerson] } = wow::filter@(concept="Person");
+
+//company
+lexicon:{
+De Wever,
+} = Partner;
+
+rule: { Person[ Partner] } = wow::filter@(concept="Person");
+
+//Telephone
+lexicon:
+{
+([:digit:]){9},
+\+ 31(.)* ([:digit:]){2} ([:digit:]){3} ([:digit:]){4},
+\+ 31(.)*,
+0([:digit:]){9},
+\+ 31 - \( 0 \) ([:digit:]){2},
+0([:digit:]){2} ([:digit:]){3} ([:digit:]){4},
+(Tele|tele)?(P|p)hone (number)? \:,
+} = TelephoneNumber;
+
+lexicon:{
+\+ 31,
+} = NoTelephonenumber;
+
+rule: { TelephoneNumber[ NoTelephonenumber] } = wow::filter@(concept="TelephoneNumber");
+
+//Address
+lexicon:
+{
+Postbus ([:digit:]){1,5} ([:digit:]){4} ([:upper:]){2} (.)*,
+P(.)?O(.)? Box ([:digit:]){1,5} ([:digit:]){4} ([:upper:]){2} (.)*,
+} = POBox;
+
+rule: { Address[ POBox] } = wow::filter@(concept="Address");
+
+lexicon: {
+Toegankelijke bestemming Regio RVN,
+VEVECI - Versterking van de veerkracht van de creatieve industrie,
+MSP Challenge User Support 2021,
+ECOSCOPE - Ecocentric management for sustainable fisheries and healthy marine ecosystems,
+Entertainment and creative video game development policy,
+MSP Challenge Shipping Safety part 2SAMSON,
+Maturity Model and Scan Zero Emission City Logistics,
+Dependency analysis tool MSP Challenge,
+Zicht op evenwicht,
+CELTH Onderzoeksagenda Duurzaamheid,
+Onderzoek Meerwaarde Waterpark Veerse Meer Nieuw,
+Economische impacts van toerisme in de gemeenten Gilze en Rijen en Alphen Chaam in 2021,
+Animated Learning for Transitions, Early Recognition 2.0,
+Recovry 2.0,
+DIGIREAL – Digital Realities for Smart Industries,
+Facial Scanning Pipeline (Epic Megagrants),
+KWF Project,
+Campmaster : Master Sustainable Outdoor Hospitality Management,
+TOURBAN - Accelerating SME capacity and innovation for sustainable urban tourism,
+Immersive Sustainable Food Experience Design,
+Virtual Production,
+Marketing Entrepreneurship and Information Technology  Sacrifice in Consumer Behavior: systematization of knowledge and sociocultural  transformational perspectives,
+Radar voor het Stadsgevoel,
+Optimal levels of tourism for experience quality and income,
+Keeping up appearances: The image re-construction process across work and nonwork domains, its causes and effects,
+Smart Cultural Tourism as a Driver of Sustainable Development of European Regions (SmartCulTour),
+Dutch Cycling Intelligence,
+STEPup,
+Agenda Bewuste Bestemming,
+DIGNITY,
+Knowledge Flows in Marine Spatial Planning : Sharing Innovation in Higher Education,
+Datascience for Logistieke Innovatie DALI,
+CIVITAS ELEVATE,
+InnovaT : Innovative Teaching and Learning,
+VR-EMERGENCY,
+Life-changing experiences,
+PPS Implementation of food interventions,
+RECOVRY,
+DigishapeDigitwin Noordzee,
+CHRONOSPHERE,
+ILIAD : Integrated Digital Framework for Comprehensive Maritime Data and Information Services,
+Circular reduction option for mobility and holidays,
+Experience Overijssel,
+European Tourism Going Green 2030,
+Sustainable business models for a wildlife economy,
+MSP Challenge Germany EEZ North Sea and Baltic,
+Fieldlab,
+Maatschappelijke Waarde Toerisme en Recreatie,
+Carbon footprint inkomend toerisme Vlaanderen,
+Visit Zuid-Limburg Impact Luchtvaartgeluid Toerisme Recreatie,
+RWS 3D Platform Ocean VR,
+MSP Adriatic Sea,
+RWS BUas-EII MSP,
+Landelijke synergie bij hogescholen in onderzoek en onderwijs rond stedelijke logistiek,
+Leisure Opportunity Game,
+Pilot autonomous and electric delivery robot at BUas campus: LOWIE LOgistiek op WIElen,
+Digishape  Digitwin II Shipping Safety,
+Bewoners werken aan een duurzame wereld,
+KNEITER Leidraad,
+UDEM,
+Public Play Spaces,
+HBO Postdoc Ondrej Mitas: Vacations for quality of life,
+BEING THERE,
+Storytelling Hanzesteden,
+Data-driven sustainable tourism dealing with climate change,
+European Maritime Days,
+Schola Medica VIR Training Tool,
+Watts2Win Energy Game,
+Bakker Barendrecht Phase I and II,
+Run for Health,
+VIRGiN,
+THERMO FISHER SCIENTIFIC,
+Force monitor with Wireless Data and Energy Transfer,
+Smart manufacturing RTM mal,
+Universal Gripper Design,
+Ontwerp test setup korte slag actuator positioneertafel met reluctantieactuator,
+CenacoDanaco,
+PLC based controller on Delta's Scara industrial robot,
+Self-leveling mechanism for stabilizing an agricultural vehicle,
+Realisatie van een Casepack robot,
+Start-Stop transfer unit spannen en sporen,
+Onderzoek en ontwerp een low-cost adaptieve robotarm gripper voor de agro-sector,
+Development test and evaluation of calibrated flow leak,
+Kantel-testmodule stretch wrapper,
+Strawberry crop detection using drones and AI,
+Ontwikkeling gym tracker,
+Development of improved machine performance driven by data,
+Safety gate and adjusting control software for new proto AM-PICK,
+Sorteermachine lopende band,
+Morfologiemeters voor komkommerteelt,
+Lijmverbindingen composiet materialen,
+Robot arm with harmonic drive reducer,
+Machinaal reinigen met steriliteit als doel,
+Refurbishment of H-stage,
+Manufacturing demonstrator,
+Development AGV for farm fields,
+Improvement autoTuner functionality and reliability,
+Robot Is Geen Superverspreider - Bartenderbot,
+End-effector with flexible electrostatic adhesion gripper,
+Tool pressure measurement,
+Design a mechanical mechanism to mix two solutions of concrete,
+Digitalizing a mechanical system,
+Design of 3D-printable monolithic optical mounts,
+Agro robot tulip bulbs inspection system,
+Machine learning for high-end mechatronic systems,
+Optimizing diamond tooling system,
+Ramses,
+Simulation of the human respiratory system,
+Autonomous 3D print robot,
+Demo bottling plant,
+Depowdering unit for Metal 3D printing,
+Designing a smart LEGO car factory,
+Design and test internal damping capacity,
+Bromm Linear Motor,
+Agitated Thin Film Dryer,
+Low code SW modelling,
+Siemens Transfer System,
+PriMo,
+SPC PLC control oil pressure,
+Ramses,
+A biological synthesis of Chlorothymol,
+A sense of touch – creating hapic feedback in VR,
+Airport Terminal Innovation,
+Battolyser combining electricity storage and conversion,
+Blue light sensor enzyme,
+Circular Area development,
+Circularity of steel-composite constructions,
+Cities of Making - Resources for activating new urban industry through technology spatial design and transition governance,
+Spatio-temporal measurement and plasma-based control of crossflow,
+Crowd Monitoring Dash Board,
+Deep Learning for Robust robot Control,
+Designing Provable Robotic Swarms,
+A distributed control system for luggage handling at the airport,
+Electron Nanoscopy of Quantum Materials,
+From pollutant to power,
+Grip on soft vulnerable  wet substrates,
+Haptics at sea,
+Improving human interaction with artificial advice givers,
+Realistic inflow generation for wind turbines,
+Innovations for dynamic fleet management,
+Realtime Learning of Malicous behaviour in computer networks,
+Mathematical aspects of image reconstruction for a frugal MRI,
+Meaningful Human Control over automated driving systems,
+Measuring mass of a single bacterium,
+Bioinspired Metal Alloys with Hierarchical Patterned Microstructures using localised laser heat treatments,
+Mitigating human factors threatening IT security,
+New method for addressing challenges in the analysis of composite material,
+Strategic Value of Design for companies,
+Subsurface Energy Storage,
+Materials for refurbishment The Schokbeton Archive,
+Tools to image and control neurodevelopment,
+Whatever makes you sit comfortable,
+Zero Friction fiction air bearing systems,
+AI and cultivating Strawberries,
+Biomolecular Ultrasound Imaging,
+Electrocatalysis for Energy Storage & Conversion,
+Fancy: Flow and Deformation of Cancer tumours near Yielding,
+Framework for discussing and reconciling divergent values in multi-disciplinary settings,
+Integrated Smart power hub for solar electric vehicle battery and heat pump,
+Learning from Failures,
+Lunar Zebro,
+MemoMOFEnergy designing ferroelectrics,
+Multidimensional non-linear optical spectroscopy in reactive flows,
+Orbiting low frequency array OLFAR,
+Orchestrating Smart Charging Electric Vehicles in mass deployment,
+Plantenna - Listening to plants,
+Preventing Injuries by baseball and tennis players,
+Preventing fruit from frost damage,
+Pride & Prejudice  design for physical activity interventions,
+Return plastic back to the same manufacturer,
+Robots among humans safe and socially intuitive navigation,
+Safe-by-Design for Industrial Biotechnology,
+Tagging concrete aggregates for circularity,
+Teaching design for Values,
+The Photonic Career Hub  CARLA,
+Unlocking the potential of computational methods in the fields of nuclear energy and radiation applications,
+Unravelling the impact of using alternative raw materials in industrial clusters,
+Visual analytics for sailing,
+} = University_Projects;

@@ -1,0 +1,106 @@
+{
+
+    "slots" : { "Doc" : { "format" : "{Path(document.document_id).parts[-2]}" } },
+    "links" :[
+    {
+        "from"      : { "slot" : "Doc" },
+        "to"        : { "expr":"HR" },
+        "relation"  : { "label": "subject" }
+    },
+    {
+        "from"      : { "slot" : "Doc" },
+        "to"        : { "expr":"City" },
+        "relation"  : { "label": "Located in" }
+    },
+    {
+        "from"      : { "slot" : "Doc" },
+        "to"        : { "expr":"University_Projects" },
+        "relation"  : { "label": "Projects" }
+    },
+    {
+        "from"      : { "slot" : "Doc" },
+        "to"        : { "expr":"POBox" },
+        "relation"  : { "label": "P.O. Box" }
+    },
+    {
+        "from"        : { "expr":"Person" },
+        "to"      : { "slot" : "Doc" },
+        "relation"  : { "label": "linked_to" }
+    },
+    {
+        "from"        : { "expr":"Person" },
+        "to"      : { "expr" : "Position" },
+        "relation"  : { "label": "works_as" }
+    },
+    {
+        "from"        : { "expr":"Person" },
+        "to"      : { "expr" : "FocusCompany" },
+        "relation"  : { "label": "company" }
+    },
+    {
+        "from"        : { "expr":"Person" },
+        "to"      : { "expr" : "Subject" },
+        "relation"  : { "label": "linked_to" }
+    },
+    {
+        "to"      : { "expr" : "University_Projects" },
+        "from"        : { "expr":"Topics" },
+        "relation"  : { "label": "Topics" }
+    },
+    {
+        "to"      : { "expr" : "University_Projects" },
+        "from"        : { "expr":"Robot"},
+        "relation"  : { "label": "Topic" }
+    },
+    {
+        "from"      : { "slot" : "Doc" },
+        "to"        : { "expr":"Address" },
+        "relation"  : { "label": "Address" }
+    },
+    {
+        "from"      : { "slot" : "Doc" },
+        "to"        : { "expr":"TelephoneNumber" },
+        "relation"  : { "label": "Telephone" }
+    },
+    {
+        "from"      : { "slot" : "Doc" },
+        "to"        : { "expr":"Email" },
+        "relation"  : { "label": "Email" }
+    },
+    {
+        "from"      : { "slot" : "Doc" },
+        "to"        : { "expr":"Partner" },
+        "relation"  : { "label": "linked_to" }
+    },
+    {
+        "from"      : { "slot" : "Doc" },
+        "to"        : { "expr":"Technology" },
+        "relation"  : { "label": "Uses" }
+    },
+    {
+        "from"      : { "slot" : "Doc" },
+        "to"        : { "expr":"CustomerSupport", "attributes":["polarity"] },
+        "relation"  : { "label": "subject" }
+    },
+    {
+        "from"      : { "slot" : "Doc" },
+        "to"        : { "expr":"Education" },
+        "relation"  : { "label": "subject" }
+    },
+    {
+        "from"      : { "slot" : "Doc" },
+        "to"        : { "expr":"Innovation" },
+        "relation"  : { "label": "subject" }
+    },
+    {
+        "from"      : { "slot" : "Doc" },
+        "to"        : { "expr":"Health" },
+        "relation"  : { "label": "subject" }
+    },
+    {
+        "from"      : { "slot" : "Doc" },
+        "to"        : { "expr":"ITC" },
+        "relation"  : { "label": "subject" }
+    }
+    ]
+}
