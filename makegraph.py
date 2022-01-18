@@ -65,14 +65,9 @@ graph_config = {
         "relation"  : { "label": "company" }
     },
     {
-        "from"        : { "expr":"Person" },
-        "to"      : { "expr" : "Subject" },
-        "relation"  : { "label": "linked_to" }
-    },
-    {
         "to"      : { "expr" : "University_Projects" },
-        "from"        : { "expr":"Topics" },
-        "relation"  : { "label": "Topics" }
+        "from"        : { "expr":"Topics", "content" : "{eot.string.initial_caps(stem)}" },
+        "relation"  : { "label": "Topic" }
     },
     {
         "from"      : { "slot" : "Doc" },
@@ -98,11 +93,6 @@ graph_config = {
         "from"      : { "slot" : "Doc" },
         "to"        : { "expr":"Technology" },
         "relation"  : { "label": "Uses" }
-    },
-    {
-        "from"      : { "slot" : "Doc" },
-        "to"        : { "expr":"CustomerSupport", "attributes":["polarity"] },
-        "relation"  : { "label": "subject" }
     },
     {
         "from"      : { "slot" : "Doc" },

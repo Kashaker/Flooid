@@ -65,7 +65,7 @@ Summer school,
 } = EducationType;
 
 lexicon: (input="normalized_literal") {
-AGV (.)*,
+AGV,
 VVDL ETG,
 Thi (.)*,
 componentvervaardigingsmachine,
@@ -85,16 +85,17 @@ Groba clan,
 vacuüm systems,
 D&M,
 Matlab Simulink program,
-energie (.)*,
+energie(.)*,
 MPC Motion Controller Platform,
 Lantech Malden,
 composiet,
+composite,
 VFI,
 Cordis,
 coronapandemie,
 hihi (-)? (.)*,
 LuGre model,
-virtual (.)*,
+virtual(.)*,
 The cobot,
 meetapparaat,
 testopstelling,
@@ -129,6 +130,8 @@ lexicon:(input="normalized_literal"){
 Robot(s)?,
 robot(s)?,
 robot(.)*,
+Robot(.)*,
+Robotic(s)?,
 } = Robot;
 
 lexicon:(input="normalized_literal"){
@@ -139,10 +142,9 @@ lexicon:(input="normalized_literal"){
 (.)* production,
 } = Production;
 
-rule: { 
-(Robot),
-(Manufacturing),
-(Production)} = Topics;
+rule: { (Robot)} = Topics;
+rule: { (Manufacturing)} = Topics;
+rule: { (Production)} = Topics;
 
 //Position
 lexicon:{
