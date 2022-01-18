@@ -46,6 +46,11 @@ graph_config = {
     },
     {
         "from"      : { "slot" : "Doc" },
+        "to"        : { "expr":"Studies" },
+        "relation"  : { "label": "Study" }
+    },
+    {
+        "from"      : { "slot" : "Doc" },
         "to"        : { "expr":"POBox" },
         "relation"  : { "label": "P.O. Box" }
     },
